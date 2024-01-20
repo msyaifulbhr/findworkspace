@@ -5,6 +5,7 @@ import { useNavigation } from '@react-navigation/native';
 import { StyleSheet, Text, View, TouchableOpacity, ScrollView } from 'react-native';
 import { colors } from '../../../assets/styles/Colors';
 import { Gs } from '../../../assets/styles/GlobalStyle';
+import InputText from '../../components/InputText';
 
 export default function Home() {
   const navigation = useNavigation();
@@ -31,18 +32,27 @@ export default function Home() {
           source={require('../../../assets/icons/notification.png')}
           style={styles.iconContainer}
           />
-
         </View>
       </View>
     )
-      
-    
   };
+
+  const renderSearch = () => {
+    return (
+      <View style={styles.sectionContainer}>
+        <InputText 
+          icon={require('../../../assets/icons/location.png')}
+          placeholder="Find work spaces in Jakarta"
+        />
+      </View>
+    );
+  };
+
   return (
     <View style={styles.container}>
       <View>
         {renderHeader()}
-        {/* {renderSearch()} */}
+        {renderSearch()}
         <ScrollView>
           {/* {renderPopularSection()} */}
           {/* {renderNewsworthy()} */}
@@ -75,6 +85,11 @@ const styles = StyleSheet.create({
     width: 24,
     height: 24,
     marginLeft: 10,
-  }
+  },
+  sectionContainer: {
+    paddingHorizontal: 24,
+    paddingBottom: 24,
+    
+  },
 });
 
