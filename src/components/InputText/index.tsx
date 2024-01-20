@@ -29,6 +29,7 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         borderColor: colors.greyContainer,
         paddingHorizontal: 20,
+        paddingVertical: 13,
     },
     searchInput: {
         marginLeft: 10,

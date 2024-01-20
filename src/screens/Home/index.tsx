@@ -48,13 +48,46 @@ export default function Home() {
     );
   };
 
+  const renderPopularSection = () => {
+    return (
+      <View style={styles.sectionContainer}>
+        <Text style={[styles.sectionTitle, Gs.h1]}>Popular</Text>
+        <View style={Gs.flexRow}>
+          <Image
+            source={require('../../../assets/images/item_1_a.png')}
+            style={styles.popularMainImage}
+          />
+          <View>
+            <Image 
+              source={require('../../../assets/images/item_1_b.png')}
+              style={styles.popularImage}
+            />
+            <Image 
+              source={require('../../../assets/images/item_1_c.png')}
+              style={styles.popularImage}
+            />
+          </View>
+        </View>
+        <View style={styles.popularContent}>
+          <View>
+            <Text style={[Gs.h2, Gs.textBlack]}>IndoorWork</Text>
+            <Text style={Gs.textGrey}>Jalan Angga Bekerja No.10</Text>
+          </View>
+          <View style={styles.popularPriceContainer}>
+            <Text style={styles.popularPriceLabel}>$599/days</Text>
+          </View>
+        </View>
+      </View>
+    );
+  };
+
   return (
     <View style={styles.container}>
       <View>
         {renderHeader()}
         {renderSearch()}
         <ScrollView>
-          {/* {renderPopularSection()} */}
+          {renderPopularSection()}
           {/* {renderNewsworthy()} */}
         </ScrollView>
       </View>
@@ -89,7 +122,38 @@ const styles = StyleSheet.create({
   sectionContainer: {
     paddingHorizontal: 24,
     paddingBottom: 24,
-    
+  },
+  popularMainImage: {
+    ...Gs.cornerXL,
+    flex: 1,
+    height: 200,
+    marginRight: 10,
+  },
+  popularImage: {
+    ...Gs.cornerMD,
+    width: 130,
+    height: 95,
+    marginBottom: 10,
+  },
+  sectionTitle: {
+    ...Gs.textBlack,
+    marginBottom: 12,
+  },
+  popularContent: {
+    ...Gs.flexRow,
+    ...Gs.justifyBetween,
+  },
+  popularPriceContainer: {
+    ...Gs.justifyCenter,
+    ...Gs.itemsCenter,
+    ...Gs.cornerXS,
+    paddingHorizontal: 12,
+    paddingVertical: 8,
+    backgroundColor: colors.secondary,
+  },
+  popularPriceLabel: {
+    ...Gs.font600,
+    ...Gs.textPrimary,
   },
 });
 
