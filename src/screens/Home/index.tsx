@@ -1,14 +1,34 @@
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { Image } from 'react-native';
+import { Image, FlatList } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { StyleSheet, Text, View, TouchableOpacity, ScrollView } from 'react-native';
 import { colors } from '../../../assets/styles/Colors';
 import { Gs } from '../../../assets/styles/GlobalStyle';
 import InputText from '../../components/InputText';
+import NewsworthyItem from '../../components/NewsworthyItem';
 
 export default function Home() {
   const navigation = useNavigation();
+
+  const handlePress = () => {
+    navigation.navigate('Details');  
+  }
+
+  const newsworthyData = [
+    {
+      title: 'Hajime',
+      address: 'Pantai Utara No. 90',
+      price: '$421/day',
+      image: require('../../../assets/images/item_2_a.png'),
+    },
+    {
+      title: 'DeepWork',
+      address: 'Syaiful Jaya No. 15',
+      price: '$580/day',
+      image: require('../../../assets/images/item_3_a.png'),
+    },
+  ];
 
   const renderHeader = () => {
     return (
@@ -81,14 +101,37 @@ export default function Home() {
     );
   };
 
+  const renderNewsworthy = () => {
+    return (
+      <View style={styles.Newsworthy}>
+        <Text style={styles.headerNewsworthy}>Newsworthy</Text>
+        <FlatList 
+          horizontal
+          showsHorizontalScrollIndicator={false}
+          data={newsworthyData}
+          keyExtractor={item => item.title}
+          renderItem={({item}) => (
+            <NewsworthyItem 
+            title={item.title} 
+            address={item.address} 
+            price={item.price} 
+            image={item.image}
+            onPress={handlePress}
+           />
+          )}
+        />
+      </View>
+    );
+  };
+
   return (
     <View style={styles.container}>
-      <View>
+      <View style={styles.contentContainer}>
         {renderHeader()}
         {renderSearch()}
-        <ScrollView>
+        <ScrollView style={styles.scrollContainer}>
           {renderPopularSection()}
-          {/* {renderNewsworthy()} */}
+          {renderNewsworthy()}
         </ScrollView>
       </View>
       {/* <ButtomNav /> */}
@@ -102,6 +145,12 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: colors.greyLight,
     paddingTop: 24,
+  },
+  contentContainer: {
+    flex: 1,
+    backgroundColor: colors.white,
+    borderBottomLeftRadius: 32,
+    borderBottomRightRadius: 32,
   },
   headerContainer: {
     ...Gs.flexRow,
@@ -154,6 +203,17 @@ const styles = StyleSheet.create({
   popularPriceLabel: {
     ...Gs.font600,
     ...Gs.textPrimary,
+  },
+  scrollContainer: {
+    height: '100%',
+  },
+  headerNewsworthy: {
+    ...Gs.h1,
+    paddingBottom: 12,
+  },
+
+  Newsworthy: {
+    paddingHorizontal: 24,
   },
 });
 
